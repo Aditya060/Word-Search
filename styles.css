@@ -119,6 +119,7 @@ main {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Popup styles */
 #popup {
     position: fixed;
     top: 50%;
@@ -149,7 +150,7 @@ main {
     display: none;
 }
 
-#reset-button {
+.popup-reset-btn {
     background: #2196f3;
     color: white;
     border: none;
@@ -160,9 +161,11 @@ main {
     transition: background 0.3s;
 }
 
-#reset-button:hover {
+.popup-reset-btn:hover {
     background: #1976d2;
 }
+
+/* Start Button Overlay */
 .start-overlay {
     position: absolute;
     top: 50%;
@@ -186,6 +189,7 @@ main {
 .hidden {
     display: none;
 }
+
 /* Reset Button Styles */
 .game-reset-btn {
     background: #ff6f61;
@@ -195,7 +199,7 @@ main {
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 15px;
     transition: background 0.3s, transform 0.2s;
 }
 
