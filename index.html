@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Start Game Button -->
+    <div id="start-button" class="start-overlay">Start Game</div>
+
+    <!-- Game Container -->
+    <div id="game-container" class="hidden">
+        <header>
+            <h1>Word Search Game</h1>
+            <div id="timer">Time Left: <span id="time-left">90</span>s</div>
+        </header>
+        <main>
+            <div id="word-grid"></div>
+            <div id="word-list">
+                <h3>Hidden Words</h3>
+                <ul id="hidden-words"></ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- Popup for Win/Loss -->
+    <div id="popup" class="hidden">
+        <div id="popup-content">
+            <h2 id="popup-message"></h2>
+            <button id="reset-button">Reset</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
