@@ -12,7 +12,7 @@ const initGame = () => {
     placeWordsInGrid(hiddenWords);
     fillRemainingCells();
     renderGrid();
-    populateWordList();
+    resetTimer();
 };
 
 // Start the game
@@ -23,17 +23,17 @@ const startGame = () => {
     startTimer();
 };
 
-// Reset the game
+// Reset the game and return to Start
 const resetGame = () => {
-    clearInterval(timerInterval); // Clear any running timer
+    resetTimer();
+    clearInterval(timerInterval);
     foundWords = [];
     selectedCells = [];
     timeLeft = 90;
-    document.getElementById('word-grid').innerHTML = ''; // Clear grid
-    document.getElementById('hidden-words').innerHTML = ''; // Clear word list
-    document.getElementById('popup').classList.add('hidden'); // Hide popup
-    initGame(); // Reinitialize the game
-    startTimer(); // Restart the timer
+    document.getElementById('word-grid').innerHTML = '';
+    document.getElementById('popup').classList.add('hidden');
+    document.getElementById('game-container').classList.add('hidden');
+    document.getElementById('start-button').classList.remove('hidden');
 };
 
 // Create an empty grid
@@ -111,17 +111,6 @@ const renderGrid = () => {
     });
 };
 
-// // Populate the list of hidden words
-// const populateWordList = () => {
-//     const wordList = document.getElementById('hidden-words');
-//     wordList.innerHTML = '';
-//     hiddenWords.forEach((word) => {
-//         const listItem = document.createElement('li');
-//         listItem.textContent = word;
-//         wordList.appendChild(listItem);
-//     });
-// };
-
 // Handle cell selection
 const selectCell = (cell, row, col) => {
     if (cell.classList.contains('correct') || selectedCells.some((c) => c.row === row && c.col === col)) return;
@@ -133,7 +122,7 @@ const selectCell = (cell, row, col) => {
     if (hiddenWords.includes(selectedWord)) {
         markCorrect();
         foundWords.push(selectedWord);
-        if (foundWords.length === hiddenWords.length) showPopup('Congratulations, You Won!', true);
+        if (foundWords.length === hiddenWords.length) showPopup('Congratulations, You Won!');
     } else if (selectedWord.length > 10) {
         resetSelection('Incorrect Word!');
     }
@@ -171,13 +160,21 @@ const startTimer = () => {
         timerElement.textContent = timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            showPopup('Time is up! Try again.', false);
+            showPopup('Time is up!');
         }
     }, 1000);
 };
 
+// Reset the timer
+const resetTimer = () => {
+    clearInterval(timerInterval);
+    timeLeft = 90;
+    const timerElement = document.getElementById('time-left');
+    timerElement.textContent = timeLeft;
+};
+
 // Show popup message
-const showPopup = (message, isWin) => {
+const showPopup = (message) => {
     const popup = document.getElementById('popup');
     document.getElementById('popup-message').textContent = message;
     popup.classList.remove('hidden');
@@ -189,11 +186,7 @@ const randomLetter = () => {
     return letters[Math.floor(Math.random() * letters.length)];
 };
 
-// Attach reset functionality to reset button on the game screen
+// Event Listeners
 document.getElementById('game-reset-button').addEventListener('click', resetGame);
-
-// Attach reset functionality to the popup reset button
 document.getElementById('reset-button').addEventListener('click', resetGame);
-
-// Attach start functionality to the start button
 document.getElementById('start-button').addEventListener('click', startGame);
