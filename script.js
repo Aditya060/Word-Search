@@ -111,16 +111,16 @@ const renderGrid = () => {
     });
 };
 
-// Populate the list of hidden words
-const populateWordList = () => {
-    const wordList = document.getElementById('hidden-words');
-    wordList.innerHTML = '';
-    hiddenWords.forEach((word) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = word;
-        wordList.appendChild(listItem);
-    });
-};
+// // Populate the list of hidden words
+// const populateWordList = () => {
+//     const wordList = document.getElementById('hidden-words');
+//     wordList.innerHTML = '';
+//     hiddenWords.forEach((word) => {
+//         const listItem = document.createElement('li');
+//         listItem.textContent = word;
+//         wordList.appendChild(listItem);
+//     });
+// };
 
 // Handle cell selection
 const selectCell = (cell, row, col) => {
