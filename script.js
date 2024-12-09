@@ -19,10 +19,21 @@ const initGame = () => {
 const startGame = () => {
     document.getElementById('start-button').classList.add('hidden');
     document.getElementById('game-container').classList.remove('hidden');
-    timeLeft = 90;
+    initGame();
+    startTimer();
+};
+
+// Reset the game
+const resetGame = () => {
+    clearInterval(timerInterval); // Clear any running timer
     foundWords = [];
     selectedCells = [];
-    startTimer();
+    timeLeft = 90;
+    document.getElementById('word-grid').innerHTML = ''; // Clear grid
+    document.getElementById('hidden-words').innerHTML = ''; // Clear word list
+    document.getElementById('popup').classList.add('hidden'); // Hide popup
+    initGame(); // Reinitialize the game
+    startTimer(); // Restart the timer
 };
 
 // Create an empty grid
@@ -178,18 +189,11 @@ const randomLetter = () => {
     return letters[Math.floor(Math.random() * letters.length)];
 };
 
-// Reset the game
-document.getElementById('reset-button').addEventListener('click', () => {
-    foundWords = [];
-    selectedCells = [];
-    clearInterval(timerInterval);
-    timeLeft = 90;
-    document.getElementById('game-container').classList.add('hidden');
-    document.getElementById('start-button').classList.remove('hidden');
-});
+// Attach reset functionality to reset button on the game screen
+document.getElementById('game-reset-button').addEventListener('click', resetGame);
 
-// Start the game when the start button is clicked
-document.getElementById('start-button').addEventListener('click', () => {
-    initGame();
-    startGame();
-});
+// Attach reset functionality to the popup reset button
+document.getElementById('reset-button').addEventListener('click', resetGame);
+
+// Attach start functionality to the start button
+document.getElementById('start-button').addEventListener('click', startGame);
