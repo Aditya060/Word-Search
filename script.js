@@ -111,18 +111,35 @@ const renderGrid = () => {
     });
 };
 
+// Sort a string alphabetically
+const sortString = (str) => str.split('').sort().join('');
+
 // Handle cell selection
 const selectCell = (cell, row, col) => {
-    if (cell.classList.contains('correct') || selectedCells.some((c) => c.row === row && c.col === col)) return;
+    // Check if the cell is already selected
+    const isSelected = selectedCells.some((c) => c.row === row && c.col === col);
 
-    cell.classList.add('selected');
-    selectedCells.push({ row, col });
+    if (cell.classList.contains('correct')) return;
+
+    if (isSelected) {
+        // Deselect the cell
+        cell.classList.remove('selected');
+        selectedCells = selectedCells.filter((c) => c.row !== row || c.col !== col);
+    } else {
+        // Select the cell
+        cell.classList.add('selected');
+        selectedCells.push({ row, col });
+    }
 
     const selectedWord = getSelectedWord();
     if (hiddenWords.includes(selectedWord)) {
         markCorrect();
         foundWords.push(selectedWord);
-        if (foundWords.length === hiddenWords.length) showPopup('Congratulations, You Won!');
+        if (foundWords.length === hiddenWords.length) showPopup(`Congratulations, You Won! Words Found: ${foundWords.length}/${hiddenWords.length}`);
+    } else if (hiddenWords.map(sortString).includes(sortString(selectedWord))) {
+        markCorrect();
+        foundWords.push(selectedWord);
+        if (foundWords.length === hiddenWords.length) showPopup(`Congratulations, You Won! Words Found: ${foundWords.length}/${hiddenWords.length}`);
     } else if (selectedWord.length > 10) {
         resetSelection('Incorrect Word!');
     }
@@ -160,7 +177,7 @@ const startTimer = () => {
         timerElement.textContent = timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            showPopup('Time is up!');
+            showPopup(`Time is up! Words Found: ${foundWords.length}/${hiddenWords.length}`);
         }
     }, 1000);
 };
