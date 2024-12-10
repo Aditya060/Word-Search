@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Background</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #6cb3ed, #1c82ba);
+            font-family: 'Arial', sans-serif;
+        }
+        .centered-container {
+            width: 90%;
+            height: 100vh;
+            max-width: 500px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.5); /* Increase opacity for translucency */
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            background-image: url("Home.png"); /* Set the background image */
+            background-size: cover; /* Ensure the image covers the entire container */
+            background-position: center; /* Center the image within the container */
+            position: relative;
+            cursor: pointer; /* Show pointer cursor for interaction */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-container" id="clickable-container"></div>
+
+    <script>
+        // Attach click event listener to the container
+        const container = document.getElementById('clickable-container');
+
+        container.addEventListener('click', (event) => {
+            const rect = container.getBoundingClientRect(); // Get container position
+            const clickY = event.clientY - rect.top; // Y-coordinate of the click within the container
+            const containerHeight = rect.height;
+
+            // Determine if click is above or below the center
+            if (clickY < containerHeight / 2) {
+                window.location.href = '/'; // Redirect to Page 1
+            } else {
+                window.location.href = 'leaderboard.html'; // Redirect to Page 2
+            }
+        });
+    </script>
+</body>
+</html>

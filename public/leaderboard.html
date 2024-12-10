@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #6cb3ed, #1c82ba);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #f5d76e;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        th {
+            background: rgba(255, 255, 255, 0.2);
+            font-size: 1.2rem;
+        }
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        td {
+            font-size: 1rem;
+        }
+        .leaderboard-container {
+            text-align: center;
+            width: 90%;
+            height: 100vh;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            background-image: url("GameScreen.png");
+            background-size: cover;
+            background-position: center;
+            overflow-y: auto;
+        }
+        .home-button {
+            margin-top: 20px;
+            background: rgba(30, 181, 215, 0.8); /* Soft blue color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+        }
+        .home-button:hover {
+            background: rgba(72, 107, 189, 0.9); /* Darker blue on hover */
+            transform: translateY(-2px); /* Slight upward movement */
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="leaderboard-container">
+        <h1>Leaderboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+                <!-- Leaderboard rows will be inserted here dynamically -->
+            </tbody>
+        </table>
+        <!-- Home Button -->
+        <button class="home-button" onclick="location.href='home.html'">Home</button>
+    </div>
+    <script>
+        // Fetch leaderboard data and render it
+        fetch('/leaderboard')
+            .then(response => response.json())
+            .then(data => {
+                const leaderboardBody = document.getElementById('leaderboard-body');
+                data.forEach((player, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${player.name}</td>
+                        <td>${player.score}</td>
+                    `;
+                    leaderboardBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching leaderboard data:', error));
+    </script>
+</body>
+</html>

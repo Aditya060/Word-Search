@@ -1,0 +1,258 @@
+/* General styles */
+body {
+    font-family: 'Aestetico Black';
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #6cb3ed, #1c82ba);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.content-container {
+    text-align: center;
+    width: 90%;
+    height: 100vh;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.5); /* Increase opacity for translucency */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    background-image: url("GameScreen.png"); /* Set the background image */
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the image within the container */
+}
+h1 {
+    font-size: 2.5rem;
+    color: #0ff; /* Cyan color for the text */
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff, 0 0 50px #0ff;
+    animation: pulseGlow 2s infinite; /* Add pulsing glow animation */
+}
+
+@keyframes pulseGlow {
+    0% {
+        text-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff, 0 0 50px #0ff, 0 0 60px #0ff;
+        transform: scale(1); /* Normal size */
+    }
+    50% {
+        text-shadow: 0 0 40px #0ff, 0 0 50px #0ff, 0 0 60px #0ff, 0 0 70px #0ff, 0 0 80px #0ff;
+        transform: scale(1.1); /* Slightly larger */
+    }
+    100% {
+        text-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff, 0 0 50px #0ff, 0 0 60px #0ff;
+        transform: scale(1); /* Back to normal size */
+    }
+}
+/* Name Input Section */
+#player-name {
+    font-size: 1.2rem;
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    border: none;
+    border-radius: 100px;
+    background: rgba(188, 246, 255, 0.687);
+    color: #000000;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#onscreen-keyboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Increase key size */
+    gap: 15px; /* Increase spacing between keys */
+    max-width: 500px; /* Increase overall width of the keyboard */
+    margin: 50px auto; /* Shift keyboard down with increased top margin */
+}
+
+.key {
+    background: rgba(28, 130, 186, 0.5); /* Transparent background */
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Add subtle border */
+    padding: 15px; /* Increase size of the keys */
+    font-size: 1.4rem; /* Increase font size */
+    border-radius: 8px; /* Slightly larger border radius for smoother edges */
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.key:hover {
+    background: rgba(20, 99, 148, 0.8); /* Darker transparent background on hover */
+    transform: scale(1.2); /* Slightly larger scaling on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Add shadow effect on hover */
+}
+
+#start-game-btn {
+    background: rgba(30, 50, 118, 0.8);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s, transform 0.2s;
+    margin-top: -50px;
+}
+
+#start-game-btn.hidden {
+    display: none;
+}
+
+#start-game-btn:hover {
+    background: rgba(112, 137, 219, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Game Page */
+#game-page header {
+    margin-bottom: 20px;
+}
+
+#timer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f5d76e;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        color: #04344f;
+    }
+    50% {
+        color: #0578a5;
+    }
+}
+
+#word-grid {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 5px;
+    height: 55vh;
+    width: 100%;
+    /* max-width: 500px; */
+    background: rgba(255, 255, 255, 0);
+    padding: 5px;
+
+    /* border-radius: 10px; */
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
+    
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.cell.selected {
+    background-color: #27358c; /* Highlight selected tiles */
+    color: #ffffff;
+    border: 1px solid #f5d76e;
+}
+
+.cell.correct {
+    background-color: #66bb6a; /* Highlight correct words */
+    color: #ffffff;
+    border: 1px solid #4a934e;
+    font-weight: bold;
+}
+
+.cell:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Popup */
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(97, 218, 237, 0.95); /* Slightly darker for better readability */
+    color: #000; /* Ensure text contrast */
+    padding: 25px 30px; /* Add more padding for better spacing */
+    border-radius: 20px; /* Make it more rounded */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4); /* Enhance shadow for depth */
+    z-index: 1000;
+    animation: popup 0.5s ease-out;
+    text-align: center;
+}
+
+/* Animated bounce effect for the popup */
+@keyframes popup {
+    0% { transform: translate(-50%, -55%) scale(0.9); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Button styles */
+.popup-reset-btn {
+    background: linear-gradient(to right, #3b8bd6, #5ca6f3); /* Gradient button */
+    color: white;
+    border: none;
+    padding: 12px 25px; /* Slightly larger padding for better clickability */
+    font-size: 1.1rem; /* Increase font size slightly */
+    font-weight: bold;
+    border-radius: 50px; /* Fully rounded buttons for a modern look */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.popup-reset-btn:hover {
+    background: linear-gradient(to right, #2a6bbd, #4b92e5); /* Darker gradient on hover */
+    transform: translateY(-3px); /* Slight hover lift effect */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+#game-reset-button {
+    background: rgba(84, 204, 241, 0.8); /* Soft blue color */
+    margin-top: 10px;
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding for size */
+    font-size: 1rem; /* Set font size */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    transition: background 0.3s, transform 0.2s; /* Smooth hover effects */
+}
+
+#game-reset-button:hover {
+    background: rgba(164, 230, 250, 0.9); /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight upward movement */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}

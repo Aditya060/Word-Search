@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search Game</title>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Start Page -->
+    <div id="start-page" class="center-screen">
+        <div class="content-container">
+            <h1>Brain Quest</h1>
+            <a href="leaderboard.html" id="leaderboard-link" title="View Leaderboard">
+                <img src="lb.png" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">
+            </a>
+            <p>Leaderboard</p>
+            <input type="text" id="player-name" placeholder="Enter your name to start" readonly>
+            <div id="onscreen-keyboard"></div>
+            <button id="start-game-btn" class="hidden">Start Game</button>
+           
+        </div>
+    </div>
+
+    <!-- Game Page -->
+    <div id="game-page" class="center-screen hidden">
+        <div class="content-container">
+            <header>
+                <h1>Brain Quest</h1>
+                <div id="timer">Time Left: <span id="time-left">30</span>s</div>
+                <button id="game-reset-button" class="game-reset-btn">Reset Game</button>
+            </header>
+            <main>
+                <div id="word-grid"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Popup for Win/Loss -->
+    <div id="popup" class="hidden">
+        <div id="popup-content">
+            <h2 id="popup-message"></h2>
+            <a href="leaderboard.html"><button id="leaderboard" class="popup-reset-btn">Leaderboard</button></a>
+            <button id="reset-button" class="popup-reset-btn">Back to Start</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
