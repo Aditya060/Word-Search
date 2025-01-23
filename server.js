@@ -6,6 +6,24 @@ const app = express();
 
 // Serve static files
 app.use(express.static('public'));
+// Endpoint to save score
+app.post('/save-score', (req, res) => {
+    const { name, score } = req.body;
+
+    if (!name || isNaN(score)) {
+        return res.status(400).json({ error: 'Invalid name or score' });
+    }
+
+    // Append the score to the CSV file
+    const csvLine = `${name},${score}\n`;
+    fs.appendFile('scores.csv', csvLine, (err) => {
+        if (err) {
+            console.error('Error saving score:', err);
+            return res.status(500).json({ error: 'Failed to save score' });
+        }
+        res.status(200).json({ message: 'Score saved successfully' });
+    });
+});
 
 // Endpoint to get leaderboard data
 app.get('/leaderboard', (req, res) => {
