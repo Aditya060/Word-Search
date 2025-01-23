@@ -4,12 +4,17 @@ const csv = require('csv-parser');
 
 const app = express();
 
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
 // Serve static files
 app.use(express.static('public'));
+
 // Endpoint to save score
 app.post('/save-score', (req, res) => {
     const { name, score } = req.body;
 
+    // Validate input
     if (!name || isNaN(score)) {
         return res.status(400).json({ error: 'Invalid name or score' });
     }
