@@ -1,6 +1,9 @@
 const gridSize = 15;
-const hiddenWords = ['WELLBEING', 'ENERGY', 'FOR', 'MENTAL', 'SOCIAL', 'PHYSICAL', 'ENVIRONMENTAL', 'SUSTAINABILITY']
-const hiddenWordsSorted = ['BEEGILLNW', 'EEGNRY', 'FOR', 'AELMNT', 'ACILOS', 'ACHILPSY', 'AEEILMNNNORTV', 'AABIIILNSSTTUY']
+const hiddenWords = [
+    'SAFETY', 'SHIELD', 'SUSTAINABILITY', 'OPERATIONS', 'PROJECTS', 'CONSULTING', 'STRATEGY', 'GROWTH', 'INCLUSIVITY', 'DIVERSITY', 'SIMPLIFICATION'
+  ];const hiddenWordsSorted = [
+    'AEFSTY', 'DEHILS', 'AABIIILNSSTTUY', 'EINOOPRST', 'CEJOPRST', 'CGILNNOSTU', 'AEGRRSTTY', 'GHORTW', 'CIIILNSTUY', 'CDEIIRSTVY', 'ACFIIILMNOPST'
+  ];
 let wordGrid = [];
 let selectedCells = [];
 let foundWords = [];
